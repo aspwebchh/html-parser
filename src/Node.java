@@ -3,6 +3,7 @@ import java.util.List;
 
 public abstract class Node implements Cloneable {
     private List<Node> childNodes = new ArrayList<>();
+    private List<Node> attrs = new ArrayList<>();
     private boolean closed = false;
     private Node root;
 
@@ -49,5 +50,13 @@ public abstract class Node implements Cloneable {
 
     public void clearChildNodes() {
         childNodes.clear();
+    }
+
+    public void addAttr(Node node) {
+        attrs.add(node);
+    }
+
+    public List<Node> getAttrs() {
+        return attrs;
     }
 }

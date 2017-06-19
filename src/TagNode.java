@@ -20,9 +20,16 @@ public class TagNode extends Node {
 
     @Override
     public String toString() {
-        String content = "<" + tagName + ">" + "\n";
+        String attrString = this.getAttrs().stream().collect(
+                StringBuilder::new,
+                (a,b)->a.append( " " + b.toString() + " "),
+                (a,b)->a.append(b)
+        ).toString();
+        String content = "<" + tagName + attrString + ">" + "\n";
         for(Node node : getChildNodes()) {
-            content += node.toString() + "\n";
+            if ( !(node instanceof AttrNode)) {
+                content += node.toString() + "\n";
+            }
         }
         if( isClosed()) {
             content += "</" + tagName + ">";

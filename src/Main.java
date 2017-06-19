@@ -17,16 +17,21 @@ public class Main {
         return isContinue;
     }
 
-    private static void processAttr( TagNode tagNode, String htmlTag ) {
+    private static void processAttr( RootNode root, TagNode tagNode, String htmlTag ) {
         Pattern pattern = Pattern.compile("\\s+(?<key>[^\\s=]+)((\\s*?=\\s*?)(\"|')(?<val>.+?)(\\4))?");
         Matcher matcher = pattern.matcher(htmlTag);
         while(matcher.find()) {
-            System.out.println(matcher.group("key") + "="+ matcher.group("val"));
+            AttrNode attrNode = new AttrNode(root);
+            String key = matcher.group("key");
+            String val = matcher.group("val");
+            attrNode.setAttr( key, val );
+            tagNode.addAttr(attrNode);
+            //System.out.println(matcher.group("key") + "="+ matcher.group("val"));
         }
     }
 
     public static void main(String[] args) {
-        String html = ReadFile.read("C:\\dev\\hp\\data1.html");
+        String html = ReadFile.read("C:\\dev\\html_parser_for_java\\data1.html");
         Pattern startTag = Pattern.compile("^<(?!\\s*\\/)[^>]+>");
         Pattern endTag = Pattern.compile("^<(?=\\s*\\/)[^>]+>");
         Pattern text = Pattern.compile("^[^<]+(?=<)");
@@ -35,13 +40,19 @@ public class Main {
         while(true) {
             Matcher startTagMatch = startTag.matcher(html);
             if( startTagMatch.find() ) {
-                TagNode tagNode = new TagNode(root);
                 String htmlTag = startTagMatch.group();
-                tagNode.setTagName(TagNode.extractTagName(htmlTag));
-                currNode.addChild(tagNode);
-                currNode = tagNode;
+                String tagName = TagNode.extractTagName(htmlTag);
+                if(tagName.toUpperCase().equals("!DOCTYPE")) {
+                    DocTypeNode docTypeNode = new DocTypeNode(root, htmlTag);
+                    currNode.addChild(docTypeNode);
+                } else {
+                    TagNode tagNode = new TagNode(root);
+                    tagNode.setTagName(tagName);
+                    currNode.addChild(tagNode);
+                    currNode = tagNode;
+                    processAttr(root, tagNode,htmlTag);
+                }
                 html = startTagMatch.replaceAll("");
-                processAttr(tagNode,htmlTag);
             } else {
                 Matcher endTagMatch = endTag.matcher(html);
                 if( endTagMatch.find()) {
@@ -71,7 +82,7 @@ public class Main {
                 }
             }
         }
-       //ump(root);
+       dump(root);
     }
 
     public static void dump(Node root) {

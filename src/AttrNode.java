@@ -14,6 +14,10 @@ public class AttrNode extends Node {
 
     @Override
     public String toString() {
-        return key + "=\"" + val + "\"";
+        String result = key;
+        if (val != null) {
+            result += "=\"" + val + "\"";
+        }
+        return result;
     }
 }
