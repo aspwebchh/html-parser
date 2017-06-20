@@ -7,8 +7,7 @@ public class DocTypeNode extends Node{
         this.htmlContent = htmlContent;
     }
 
-    @Override
-    public String toString() {
+    public String toHtml() {
         return htmlContent + "\n";
     }
 }

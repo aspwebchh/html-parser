@@ -59,4 +59,6 @@ public abstract class Node implements Cloneable {
     public List<Node> getAttrs() {
         return attrs;
     }
+
+    public abstract String toHtml();
 }

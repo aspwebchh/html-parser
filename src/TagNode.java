@@ -29,10 +29,10 @@ public class TagNode extends Node {
     }
 
     @Override
-    public String toString() {
+    public String toHtml() {
         String attrString = this.getAttrs().stream().collect(
                 StringBuilder::new,
-                (a,b)->a.append( " " + b.toString() + " "),
+                (a,b)->a.append( " " + b.toHtml() + " "),
                 (a,b)->a.append(b)
         ).toString();
         if( isSingle ) {
@@ -41,7 +41,7 @@ public class TagNode extends Node {
         String content = "<" + tagName + attrString + ">" + "\n";
         for(Node node : getChildNodes()) {
             if ( !(node instanceof AttrNode)) {
-                content += node.toString() + "\n";
+                content += node.toHtml() + "\n";
             }
         }
         if( isClosed()) {

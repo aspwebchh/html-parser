@@ -15,7 +15,7 @@ public class AttrNode extends Node {
     }
 
     @Override
-    public String toString() {
+    public String toHtml() {
         String result = key;
         if (val != null) {
             result += "=\"" + val + "\"";

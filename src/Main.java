@@ -11,6 +11,6 @@ public class Main {
     }
 
     public static void dump(Node root) {
-        System.out.println(root.toString());
+        System.out.println(root.toHtml());
     }
 }

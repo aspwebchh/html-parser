@@ -18,8 +18,7 @@ public class TextNode extends Node{
         return text;
     }
 
-    @Override
-    public String toString() {
+    public String toHtml() {
         return text;
     }
 }

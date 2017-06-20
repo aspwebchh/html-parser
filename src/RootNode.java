@@ -8,10 +8,10 @@ public class RootNode extends Node{
     }
 
     @Override
-    public String toString() {
+    public String toHtml() {
         String content = "";
         for(Node node : getChildNodes()) {
-            content += node.toString();
+            content += node.toHtml();
         }
         return content;
     }
