@@ -4,11 +4,21 @@ import java.util.regex.Pattern;
 public class TagNode extends Node {
     private String tagName;
     private Node root;
+    private boolean isSingle;
 
     public TagNode(Node root) {
         super(root);
         this.root = root;
     }
+
+    public void setSingle( boolean isSingle) {
+        this.isSingle = isSingle;
+    }
+
+    public boolean isSingle() {
+        return this.isSingle;
+    }
+
 
     public String getTagName() {
         return tagName;
@@ -25,6 +35,9 @@ public class TagNode extends Node {
                 (a,b)->a.append( " " + b.toString() + " "),
                 (a,b)->a.append(b)
         ).toString();
+        if( isSingle ) {
+            return  "<" + tagName + attrString + "/>" + "\n";
+        }
         String content = "<" + tagName + attrString + ">" + "\n";
         for(Node node : getChildNodes()) {
             if ( !(node instanceof AttrNode)) {
