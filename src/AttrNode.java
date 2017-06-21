@@ -14,12 +14,15 @@ public class AttrNode extends Node {
         this.val = val;
     }
 
-    @Override
     public String toHtml() {
         String result = key;
         if (val != null) {
             result += "=\"" + val + "\"";
         }
         return result;
+    }
+
+    public String toJSON() {
+        return   "{\"@" + this.key +"\":\""+ Common.replaceLetter( val ) +"\"}";
     }
 }

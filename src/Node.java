@@ -19,7 +19,7 @@ public abstract class Node implements Cloneable {
         return closed;
     }
 
-    private Node findParent( Node node, Node parent ) {
+    private Node findParent(Node node, Node parent) {
         Node result = null;
         for (Node item : parent.getChildNodes()) {
             if (node == item) {
@@ -36,7 +36,7 @@ public abstract class Node implements Cloneable {
         return findParent(this, root);
     }
 
-    public void addChild( Node node ) {
+    public void addChild(Node node) {
         childNodes.add(node);
     }
 
@@ -61,4 +61,6 @@ public abstract class Node implements Cloneable {
     }
 
     public abstract String toHtml();
+
+    public abstract String toJSON();
 }

@@ -10,4 +10,8 @@ public class DocTypeNode extends Node{
     public String toHtml() {
         return htmlContent + "\n";
     }
+
+    public String toJSON() {
+        return "";
+    }
 }

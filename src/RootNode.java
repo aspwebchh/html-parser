@@ -16,6 +16,18 @@ public class RootNode extends Node{
         return content;
     }
 
+    @Override
+    public String toJSON() {
+        String json = "";
+        for(Node node : getChildNodes()) {
+            if( !(node instanceof DocTypeNode)) {
+                json +=(node.toJSON());
+                break;
+            }
+        }
+        return json;
+    }
+
     public static boolean canClose( Node currNode, String tagName ) {
         Node testCurrNode = currNode;
         boolean isContinue = true;

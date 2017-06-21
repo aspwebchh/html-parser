@@ -21,4 +21,8 @@ public class TextNode extends Node{
     public String toHtml() {
         return text;
     }
+
+    public String toJSON() {
+        return  "{\"text\":\"" + Common.replaceLetter( this.text ) + "\"}";
+    }
 }
