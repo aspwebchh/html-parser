@@ -1,6 +1,7 @@
 package Arithmetic;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -86,22 +87,8 @@ public class Arithmetic1 {
     }
 
     public static boolean compute(String expression) {
-        items = new ArrayList<String>();
-        items.add("(");
-        items.add("2");
-        items.add("*");
-        items.add("(");
-        items.add("2");
-        items.add("+");
-        items.add("91");
-        items.add(")");
-        items.add("+");
-        items.add("11");
-        items.add(")");
-        items.add("*");
-        items.add("2");
+        items = (ArrayList<String>) Tokenizer.tokenizer(expression);
 
-        System.out.println(items);
 
         word = nextWord();
 
