@@ -89,7 +89,6 @@ public class Arithmetic1 {
     public static boolean compute(String expression) {
         items = (ArrayList<String>) Tokenizer.tokenizer(expression);
 
-
         word = nextWord();
 
         if( expr() ) {
