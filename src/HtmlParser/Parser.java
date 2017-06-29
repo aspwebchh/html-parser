@@ -21,7 +21,7 @@ public class Parser {
         if( token == null ) {
             return false;
         }
-        Pattern pattern = Pattern.compile("^<[^>\\/]+>$");
+        Pattern pattern = Pattern.compile("^<\\s*[^> \\/]+([^>](?!\\/ *>))+>$");
         Matcher matcher = pattern.matcher(token);
         return matcher.find();
     }

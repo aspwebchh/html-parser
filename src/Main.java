@@ -1,5 +1,6 @@
 import Arithmetic.Arithmetic1;
 import HtmlParser.Parser;
+import HtmlParser.Tokenizer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,28 +19,20 @@ public class Main {
     }
 
     private static void htmlParser2() {
-        List<String> tokens = new ArrayList<>();
-        tokens.add("<div>");
-        tokens.add("<p>");
-        tokens.add("content");
-        tokens.add("</p>");
-        tokens.add("<span>");
-        tokens.add("<p>");
-        tokens.add("<p>");
-        tokens.add("<p>");
-        tokens.add("content");
-        tokens.add("</p>");
-        tokens.add("</p>");
-        tokens.add("</p>");
-        tokens.add("</span>");
-        //tokens.add("<input type='text'>");
-        //tokens.add("这是一个文本节点");
-        tokens.add("</div>");
+        List<String> tokens = Tokenizer.tokenizer("<html lang=\"en\" xmlns=\"http://www.w3.org/1999/html\">\n" +
+                "<head>\n" +
+                "    <meta charset=\"UTF-8\">\n" +
+                "    <title>Title</title>\n" +
+                "</head>\n" +
+                "<body>\n" +
+                "<div>标\"题</div>\n" +
+                "<div>内容</div>\n" +
+                "</body>\n" +
+                "</html>");
         Parser.parser(tokens);
     }
 
     public static void main(String[] args) {
-        //htmlParser1();
         //arithmetic();
         htmlParser2();
     }
